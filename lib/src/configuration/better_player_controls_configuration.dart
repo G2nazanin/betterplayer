@@ -134,6 +134,8 @@ class BetterPlayerControlsConfiguration {
   ///Icon of the qualities menu item from overflow menu
   final IconData qualitiesIcon;
 
+  final IconData reportIcon;
+
   ///Icon of the audios menu item from overflow menu
   final IconData audioTracksIcon;
 
@@ -161,6 +163,7 @@ class BetterPlayerControlsConfiguration {
   ///Color of text in bottom modal sheet used for overflow menu items.
   final Color overflowModalTextColor;
 
+  final String fontFamily;
   const BetterPlayerControlsConfiguration({
     this.controlBarColor = Colors.black87,
     this.textColor = Colors.white,
@@ -203,6 +206,7 @@ class BetterPlayerControlsConfiguration {
     this.pipMenuIcon = Icons.picture_in_picture_outlined,
     this.playbackSpeedIcon = Icons.shutter_speed_outlined,
     this.qualitiesIcon = Icons.hd_outlined,
+    this.reportIcon = Icons.report_gmailerrorred,
     this.subtitlesIcon = Icons.closed_caption_outlined,
     this.audioTracksIcon = Icons.audiotrack_outlined,
     this.overflowMenuIconsColor = Colors.black,
@@ -213,6 +217,7 @@ class BetterPlayerControlsConfiguration {
     this.backgroundColor = Colors.black,
     this.overflowModalColor = Colors.white,
     this.overflowModalTextColor = Colors.black,
+    this.fontFamily ="iranSans"
   });
 
   factory BetterPlayerControlsConfiguration.white() {

@@ -11,23 +11,28 @@ class BetterPlayerTranslations {
   final String overflowMenuPlaybackSpeed;
   final String overflowMenuSubtitles;
   final String overflowMenuQuality;
+  final String overflowMenuReport;
   final String overflowMenuAudioTracks;
   final String qualityAuto;
 
   BetterPlayerTranslations(
-      {this.languageCode = "en",
-      this.generalDefaultError = "Video can't be played",
-      this.generalNone = "None",
-      this.generalDefault = "Default",
-      this.generalRetry = "Retry",
-      this.playlistLoadingNextVideo = "Loading next video",
-      this.controlsLive = "LIVE",
-      this.controlsNextVideoIn = "Next video in",
-      this.overflowMenuPlaybackSpeed = "Playback speed",
-      this.overflowMenuSubtitles = "Subtitles",
-      this.overflowMenuQuality = "Quality",
-      this.overflowMenuAudioTracks = "Audio",
-      this.qualityAuto = "Auto"});
+      {
+        this.languageCode= "fa",
+        this.generalDefaultError= "ویدئو قابل پخش نمی‌باشد!",
+        this.generalNone= "None",
+        this.generalDefault= "Default",
+        this.generalRetry= "تلاش دوباره",
+        this.playlistLoadingNextVideo= "دانلود ویدئو بعدی",
+        this.controlsNextVideoIn= "Next video in",
+        this.overflowMenuPlaybackSpeed= "سرعت پخش",
+        this.overflowMenuSubtitles= "زیرنویس",
+        this.overflowMenuQuality= "کیفیت پخش",
+        this.overflowMenuAudioTracks= "صدا",
+        this.overflowMenuReport= "گزارش خرابی",
+        this.qualityAuto= "اتوماتیک",
+        this.controlsLive ="LIVE",
+
+       });
 
   factory BetterPlayerTranslations.polish() => BetterPlayerTranslations(
         languageCode: "pl",
@@ -41,8 +46,26 @@ class BetterPlayerTranslations {
         overflowMenuSubtitles: "Napisy",
         overflowMenuQuality: "Jakość",
         overflowMenuAudioTracks: "Dźwięk",
+        overflowMenuReport: "",
         qualityAuto: "Automatycznie",
       );
+  factory BetterPlayerTranslations.persian() => BetterPlayerTranslations(
+      languageCode :"en",
+      generalDefaultError :"Video can't be played",
+      generalNone :"None",
+      generalDefault :"Default",
+      generalRetry :"Retry",
+      playlistLoadingNextVideo :"Loading next video",
+
+      controlsNextVideoIn :"Next video in",
+      overflowMenuPlaybackSpeed :"Playback speed",
+      overflowMenuSubtitles :"Subtitles",
+      overflowMenuQuality :"Quality",
+      overflowMenuReport :"Bug report",
+      overflowMenuAudioTracks :"Audio",
+      qualityAuto :"Auto"
+  );
+
 
   factory BetterPlayerTranslations.chinese() => BetterPlayerTranslations(
         languageCode: "zh",
@@ -56,6 +79,7 @@ class BetterPlayerTranslations {
         overflowMenuPlaybackSpeed: "播放速度",
         overflowMenuSubtitles: "字幕",
         overflowMenuQuality: "质量",
+        overflowMenuReport: "",
         overflowMenuAudioTracks: "音訊",
         qualityAuto: "汽車",
       );
@@ -72,6 +96,7 @@ class BetterPlayerTranslations {
         overflowMenuPlaybackSpeed: "प्लेबैक की गति",
         overflowMenuSubtitles: "उपशीर्षक",
         overflowMenuQuality: "गुणवत्ता",
+        overflowMenuReport: "",
         overflowMenuAudioTracks: "ऑडियो",
         qualityAuto: "ऑटो",
       );
@@ -89,6 +114,7 @@ class BetterPlayerTranslations {
         overflowMenuSubtitles: "الترجمة",
         overflowMenuQuality: "الجودة",
         overflowMenuAudioTracks: "الصوت",
+        overflowMenuReport: "",
         qualityAuto: "ऑटो",
       );
 
