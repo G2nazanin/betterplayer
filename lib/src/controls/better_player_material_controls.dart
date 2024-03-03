@@ -91,23 +91,27 @@ class _BetterPlayerMaterialControlsState
           BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
         }
       },
+
       child: AbsorbPointer(
         absorbing: controlsNotVisible,
-        child: Stack(
-          fit: StackFit.expand,
+        child:
+        Stack(
+        //   // fit: StackFit.expand,
           children: [
             if (_wasLoading)
               Center(child: _buildLoadingWidget())
             else
-              _buildHitArea(),
+        //       _buildHitArea(),
             Positioned(
               top: 0,
               left: 0,
               right: 0,
               child: _buildTopBar(),
             ),
-            Positioned(bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
-            _buildNextVideoWidget(),
+            Positioned(bottom: 0, left: 0, right: 0, child:
+            _buildBottomBar()
+            ),
+            // _buildNextVideoWidget(),
           ],
         ),
       ),

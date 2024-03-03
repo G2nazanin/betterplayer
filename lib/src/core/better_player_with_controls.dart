@@ -130,9 +130,10 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
         fit: StackFit.passthrough,
         children: <Widget>[
           if (placeholderOnTop) _buildPlaceholder(betterPlayerController),
-          Transform.rotate(
+         Transform.rotate(
             angle: rotation * pi / 180,
-            child: _BetterPlayerVideoFitWidget(
+            child:
+            _BetterPlayerVideoFitWidget(
               betterPlayerController,
               betterPlayerController.getFit(),
             ),
@@ -308,7 +309,13 @@ class _BetterPlayerVideoFitWidgetState
               child: SizedBox(
                 width: controller!.value.size?.width ?? 0,
                 height: controller!.value.size?.height ?? 0,
-                child: VideoPlayer(controller),
+                child:  InteractiveViewer(
+                  panEnabled: false, // Set it to false to prevent panning.
+                  boundaryMargin: EdgeInsets.all(80),
+                  minScale: 1,
+                  maxScale: 5,
+                  child:VideoPlayer(controller),
+                )
               ),
             ),
           ),
