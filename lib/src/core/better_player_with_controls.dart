@@ -347,7 +347,7 @@ class _BetterPlayerVideoFitWidgetState
                 width: controller!.value.size?.width ?? 0,
                 height: controller!.value.size?.height ?? 0,
                 child:  InteractiveViewer(
-                  panEnabled: false, // Set it to false to prevent panning.
+                  panEnabled: true, // Set it to false to prevent panning.
                   boundaryMargin: EdgeInsets.all(0),
                   minScale: 1,
                   maxScale: 5,
