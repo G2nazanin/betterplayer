@@ -149,8 +149,9 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
         fit: StackFit.passthrough,
         children: <Widget>[
           if (placeholderOnTop) _buildPlaceholder(betterPlayerController),
-          GestureDetector(
+          InkWell(
             onTap: () {
+              print('ghghg');
               setState(() {
                 showControl = true;
               });
@@ -173,13 +174,13 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
             playerVisibilityStream: playerVisibilityStreamController.stream,
           ),
           if (!placeholderOnTop) _buildPlaceholder(betterPlayerController),
-          if(showControl) GestureDetector(
+          if(showControl|| Platform.isIOS) GestureDetector(
             onTap: (){
               setState(() {
                 showControl= false;
               });
             },
-            child: AnimatedOpacity(
+          child: AnimatedOpacity(
               opacity: showControl? 1.0 :0,
               duration: Duration(milliseconds: 500),
               child: _buildControls(context, betterPlayerController),
@@ -235,6 +236,12 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
     return BetterPlayerCupertinoControls(
       onControlsVisibilityChanged: onControlsVisibilityChanged,
       controlsConfiguration: controlsConfiguration,
+      onShowControl: (bool value){
+        setState(() {
+          showControl = true;
+        });
+        _startHideTimer();
+      },
     );
   }
 

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 class BetterPlayerCupertinoControls extends StatefulWidget {
   ///Callback used to send information if player bar is hidden or not
   final Function(bool visbility) onControlsVisibilityChanged;
+  final Function(bool visbility) onShowControl;
 
   ///Controls config
   final BetterPlayerControlsConfiguration controlsConfiguration;
@@ -20,6 +21,7 @@ class BetterPlayerCupertinoControls extends StatefulWidget {
   const BetterPlayerCupertinoControls({
     required this.onControlsVisibilityChanged,
     required this.controlsConfiguration,
+    required this.onShowControl,
     Key? key,
   }) : super(key: key);
 
@@ -103,8 +105,10 @@ class _BetterPlayerCupertinoControlsState
       ),
     ]);
     return
-      // GestureDetector(
-      // onTap: () {
+      GestureDetector(
+      onTap: () {
+        print('ffjfj');
+        widget.onShowControl(true);
       //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
       //     BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
       //   }
@@ -123,13 +127,14 @@ class _BetterPlayerCupertinoControlsState
       //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
       //     BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
       //   }
-      // },
-      // child: AbsorbPointer(
-      //     absorbing: controlsNotVisible,
-      //     child:
-              isFullScreen ? SafeArea(child: controlsColumn) : controlsColumn ;
-    // ),
-    // );
+      },
+      child:
+        AbsorbPointer(
+            absorbing: controlsNotVisible,
+            child:
+            isFullScreen ? SafeArea(child: controlsColumn) : controlsColumn
+      ),
+    );
   }
 
   @override
@@ -169,7 +174,7 @@ class _BetterPlayerCupertinoControlsState
       return const SizedBox();
     }
     return AnimatedOpacity(
-      opacity: controlsNotVisible ? 0.0 : 1.0,
+      opacity:  1.0,
       duration: _controlsConfiguration.controlsHideTime,
       onEnd: _onPlayerHide,
       child: Container(
@@ -250,7 +255,7 @@ class _BetterPlayerCupertinoControlsState
     return GestureDetector(
       onTap: _onExpandCollapse,
       child: AnimatedOpacity(
-        opacity: controlsNotVisible ? 0.0 : 1.0,
+        opacity: 1.0,
         duration: _controlsConfiguration.controlsHideTime,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -311,7 +316,7 @@ class _BetterPlayerCupertinoControlsState
         onShowMoreClicked();
       },
       child: AnimatedOpacity(
-        opacity: controlsNotVisible ? 0.0 : 1.0,
+        opacity:  1.0,
         duration: _controlsConfiguration.controlsHideTime,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
@@ -356,7 +361,7 @@ class _BetterPlayerCupertinoControlsState
         }
       },
       child: AnimatedOpacity(
-        opacity: controlsNotVisible ? 0.0 : 1.0,
+        opacity:  1.0,
         duration: _controlsConfiguration.controlsHideTime,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
@@ -779,7 +784,7 @@ class _BetterPlayerCupertinoControlsState
                   betterPlayerController!.betterPlayerGlobalKey!);
             },
             child: AnimatedOpacity(
-              opacity: controlsNotVisible ? 0.0 : 1.0,
+              opacity: 1.0,
               duration: _controlsConfiguration.controlsHideTime,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
