@@ -34,11 +34,16 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
 
   StreamSubscription? _controllerEventSubscription;
 
+
+  bool showControl = true;
+  Timer? _hideTimer;
+
   @override
   void initState() {
     playerVisibilityStreamController.add(true);
     _controllerEventSubscription =
         widget.controller!.controllerEventStream.listen(_onControllerChanged);
+    _startHideTimer();
     super.initState();
   }
 
@@ -56,6 +61,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
   void dispose() {
     playerVisibilityStreamController.close();
     _controllerEventSubscription?.cancel();
+    _hideTimer?.cancel();
     super.dispose();
   }
 
@@ -66,6 +72,19 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
       }
     });
   }
+  void _startHideTimer() {
+    if (widget.controller!.controlsAlwaysVisible) {
+      return;
+    }
+    _hideTimer = Timer(const Duration(milliseconds: 3000), () {
+      if(widget.controller!.isPlaying()??true) {
+        setState(() {
+          showControl = false;
+        });
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,12 +149,19 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
         fit: StackFit.passthrough,
         children: <Widget>[
           if (placeholderOnTop) _buildPlaceholder(betterPlayerController),
-         Transform.rotate(
-            angle: rotation * pi / 180,
-            child:
-            _BetterPlayerVideoFitWidget(
-              betterPlayerController,
-              betterPlayerController.getFit(),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                showControl = true;
+              });
+              _startHideTimer();
+            },
+            child: Transform.rotate(
+              angle: rotation * pi / 180,
+              child: _BetterPlayerVideoFitWidget(
+                betterPlayerController,
+                betterPlayerController.getFit(),
+              ),
             ),
           ),
           betterPlayerController.betterPlayerConfiguration.overlay ??
@@ -147,7 +173,18 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
             playerVisibilityStream: playerVisibilityStreamController.stream,
           ),
           if (!placeholderOnTop) _buildPlaceholder(betterPlayerController),
-          _buildControls(context, betterPlayerController),
+          if(showControl) GestureDetector(
+            onTap: (){
+              setState(() {
+                showControl= false;
+              });
+            },
+            child: AnimatedOpacity(
+              opacity: showControl? 1.0 :0,
+              duration: Duration(milliseconds: 500),
+              child: _buildControls(context, betterPlayerController),
+            ),
+          ),
         ],
       ),
     );
@@ -311,7 +348,7 @@ class _BetterPlayerVideoFitWidgetState
                 height: controller!.value.size?.height ?? 0,
                 child:  InteractiveViewer(
                   panEnabled: false, // Set it to false to prevent panning.
-                  boundaryMargin: EdgeInsets.all(80),
+                  boundaryMargin: EdgeInsets.all(0),
                   minScale: 1,
                   maxScale: 5,
                   child:VideoPlayer(controller),

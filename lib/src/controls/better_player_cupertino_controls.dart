@@ -102,32 +102,34 @@ class _BetterPlayerCupertinoControlsState
         barHeight,
       ),
     ]);
-    return GestureDetector(
-      onTap: () {
-        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-          BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
-        }
-        controlsNotVisible
-            ? cancelAndRestartTimer()
-            : changePlayerControlsNotVisible(true);
-      },
-      onDoubleTap: () {
-        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-          BetterPlayerMultipleGestureDetector.of(context)!.onDoubleTap?.call();
-        }
-        cancelAndRestartTimer();
-        _onPlayPause();
-      },
-      onLongPress: () {
-        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-          BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
-        }
-      },
-      child: AbsorbPointer(
-          absorbing: controlsNotVisible,
-          child:
-              isFullScreen ? SafeArea(child: controlsColumn) : controlsColumn),
-    );
+    return
+      // GestureDetector(
+      // onTap: () {
+      //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+      //     BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
+      //   }
+      //   controlsNotVisible
+      //       ? cancelAndRestartTimer()
+      //       : changePlayerControlsNotVisible(true);
+      // },
+      // onDoubleTap: () {
+      //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+      //     BetterPlayerMultipleGestureDetector.of(context)!.onDoubleTap?.call();
+      //   }
+      //   cancelAndRestartTimer();
+      //   _onPlayPause();
+      // },
+      // onLongPress: () {
+      //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+      //     BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
+      //   }
+      // },
+      // child: AbsorbPointer(
+      //     absorbing: controlsNotVisible,
+      //     child:
+              isFullScreen ? SafeArea(child: controlsColumn) : controlsColumn ;
+    // ),
+    // );
   }
 
   @override
