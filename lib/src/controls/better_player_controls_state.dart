@@ -333,8 +333,8 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
 
     return BetterPlayerMaterialClickableWidget(
       onTap: () {
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
+        Navigator.pop(context);
+        Navigator.pop(context);
         betterPlayerController!.setTrack(track);
       },
       child: Padding(
