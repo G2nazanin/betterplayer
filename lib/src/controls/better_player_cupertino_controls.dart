@@ -14,6 +14,7 @@ class BetterPlayerCupertinoControls extends StatefulWidget {
   ///Callback used to send information if player bar is hidden or not
   final Function(bool visbility) onControlsVisibilityChanged;
   final Function(bool visbility) onShowControl;
+  final Function(bool visbility) onShowMenu;
 
   ///Controls config
   final BetterPlayerControlsConfiguration controlsConfiguration;
@@ -22,6 +23,7 @@ class BetterPlayerCupertinoControls extends StatefulWidget {
     required this.onControlsVisibilityChanged,
     required this.controlsConfiguration,
     required this.onShowControl,
+    required this.onShowMenu,
     Key? key,
   }) : super(key: key);
 
@@ -105,36 +107,35 @@ class _BetterPlayerCupertinoControlsState
       ),
     ]);
     return
-      GestureDetector(
-      onTap: () {
-        print('ffjfj');
-        widget.onShowControl(true);
+      // GestureDetector(
+      //   onTap: () {
+      //   widget.onShowControl(true);
       //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
       //     BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
       //   }
       //   controlsNotVisible
       //       ? cancelAndRestartTimer()
       //       : changePlayerControlsNotVisible(true);
-      // },
-      // onDoubleTap: () {
-      //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-      //     BetterPlayerMultipleGestureDetector.of(context)!.onDoubleTap?.call();
-      //   }
-      //   cancelAndRestartTimer();
-      //   _onPlayPause();
-      // },
-      // onLongPress: () {
-      //   if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-      //     BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
-      //   }
-      },
-      child:
-        AbsorbPointer(
-            absorbing: controlsNotVisible,
-            child:
-            isFullScreen ? SafeArea(child: controlsColumn) : controlsColumn
-      ),
-    );
+      //   },
+      //   onDoubleTap: () {
+      //     if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+      //       BetterPlayerMultipleGestureDetector.of(context)!.onDoubleTap?.call();
+      //     }
+      //     cancelAndRestartTimer();
+      //     _onPlayPause();
+      //   },
+      //   onLongPress: () {
+      //     if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+      //       BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
+      //     }
+      //   },
+      // child:
+        // AbsorbPointer(
+        //     absorbing: controlsNotVisible,
+        //     child:
+            isFullScreen ? SafeArea(child: controlsColumn) : controlsColumn;
+      // ),
+    // );
   }
 
   @override
@@ -303,7 +304,7 @@ class _BetterPlayerCupertinoControlsState
     );
   }
 
-  GestureDetector _buildMoreButton(
+  Widget _buildMoreButton(
     VideoPlayerController? controller,
     Color backgroundColor,
     Color iconColor,
@@ -312,11 +313,13 @@ class _BetterPlayerCupertinoControlsState
     double buttonPadding,
   ) {
     return GestureDetector(
-      onTap: () {
-        onShowMoreClicked();
+      onTap: () async{
+        widget.onShowMenu(true);
+        await onShowMoreClicked();
+        widget.onShowMenu(false);
       },
       child: AnimatedOpacity(
-        opacity:  1.0,
+        opacity: 1.0,
         duration: _controlsConfiguration.controlsHideTime,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
@@ -361,7 +364,7 @@ class _BetterPlayerCupertinoControlsState
         }
       },
       child: AnimatedOpacity(
-        opacity:  1.0,
+        opacity: 1.0,
         duration: _controlsConfiguration.controlsHideTime,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),

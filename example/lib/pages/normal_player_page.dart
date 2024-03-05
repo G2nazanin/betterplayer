@@ -27,7 +27,7 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
     );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      Constants.forBiggerBlazesUrl,
+      "https://customer-bgbr1u8j9rke7xd9.cloudflarestream.com/440ad0d7f83a47fabb08df34736dd701/manifest/video.m3u8",
     );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.setupDataSource(_betterPlayerDataSource);

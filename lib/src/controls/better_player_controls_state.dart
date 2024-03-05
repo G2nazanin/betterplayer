@@ -58,8 +58,8 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
     }
   }
 
-  void onShowMoreClicked() {
-    _showModalBottomSheet([_buildMoreOptionsList()]);
+  Future<void> onShowMoreClicked() async {
+    await _showModalBottomSheet([_buildMoreOptionsList()]);
   }
 
   Widget _buildMoreOptionsList() {
@@ -75,7 +75,6 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
                 _buildMoreOptionsListRow(
                     betterPlayerControlsConfiguration.playbackSpeedIcon,
                     translations.overflowMenuPlaybackSpeed, () {
-                  Navigator.of(context).pop();
                   _showSpeedChooserWidget();
                 }),
               // if (betterPlayerControlsConfiguration.enableSubtitles)
@@ -89,7 +88,6 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
                 _buildMoreOptionsListRow(
                     betterPlayerControlsConfiguration.qualitiesIcon,
                     translations.overflowMenuQuality, () {
-                  Navigator.of(context).pop();
                   _showQualitiesSelectionWidget();
                 }),
               _buildMoreOptionsListRow(
@@ -171,8 +169,9 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
 
     return BetterPlayerMaterialClickableWidget(
       onTap: () {
-        Navigator.of(context).pop();
         betterPlayerController!.setSpeed(value);
+        Navigator.pop(context);
+        Navigator.pop(context);
       },
       child: Directionality(
         textDirection: TextDirection.rtl,
@@ -335,6 +334,7 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
     return BetterPlayerMaterialClickableWidget(
       onTap: () {
         Navigator.of(context).pop();
+        Navigator.of(context).pop();
         betterPlayerController!.setTrack(track);
       },
       child: Padding(
@@ -461,14 +461,14 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
     );
   }
 
-  void _showModalBottomSheet(List<Widget> children) {
+  Future<void> _showModalBottomSheet(List<Widget> children)async {
     Platform.isAndroid
-        ? _showMaterialBottomSheet(children)
-        : _showCupertinoModalBottomSheet(children);
+        ? await _showMaterialBottomSheet(children)
+        : await _showCupertinoModalBottomSheet(children);
   }
 
-  void _showCupertinoModalBottomSheet(List<Widget> children) {
-    showCupertinoModalPopup<void>(
+  Future<void> _showCupertinoModalBottomSheet(List<Widget> children) async{
+    await showCupertinoModalPopup<void>(
       barrierColor: Colors.transparent,
       context: context,
       useRootNavigator:
@@ -498,8 +498,8 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
     );
   }
 
-  void _showMaterialBottomSheet(List<Widget> children) {
-    showModalBottomSheet<void>(
+  Future<void> _showMaterialBottomSheet(List<Widget> children) async{
+   await showModalBottomSheet<void>(
       backgroundColor: Colors.transparent,
       context: context,
       useRootNavigator:

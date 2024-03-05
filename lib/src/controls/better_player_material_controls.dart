@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 class BetterPlayerMaterialControls extends StatefulWidget {
   ///Callback used to send information if player bar is hidden or not
   final Function(bool visbility) onControlsVisibilityChanged;
+  final Function(bool visbility) onShowMenu;
 
   ///Controls config
   final BetterPlayerControlsConfiguration controlsConfiguration;
@@ -23,6 +24,7 @@ class BetterPlayerMaterialControls extends StatefulWidget {
     Key? key,
     required this.onControlsVisibilityChanged,
     required this.controlsConfiguration,
+    required this.onShowMenu,
   }) : super(key: key);
 
   @override
@@ -201,7 +203,7 @@ class _BetterPlayerMaterialControlsState
     return Container(
       child: (_controlsConfiguration.enableOverflowMenu)
           ? AnimatedOpacity(
-              opacity: controlsNotVisible ? 0.0 : 1.0,
+              opacity: 1.0,
               duration: _controlsConfiguration.controlsHideTime,
               onEnd: _onPlayerHide,
               child: Container(
@@ -271,8 +273,10 @@ class _BetterPlayerMaterialControlsState
 
   Widget _buildMoreButton() {
     return BetterPlayerMaterialClickableWidget(
-      onTap: () {
-        onShowMoreClicked();
+      onTap: () async{
+        widget.onShowMenu(true);
+        await onShowMoreClicked();
+        widget.onShowMenu(false);
       },
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -289,7 +293,7 @@ class _BetterPlayerMaterialControlsState
       return const SizedBox();
     }
     return AnimatedOpacity(
-      opacity:controlsNotVisible ? 0.0 : 1.0,
+      opacity: 1.0,
       duration: _controlsConfiguration.controlsHideTime,
       onEnd: _onPlayerHide,
       child: Container(
@@ -350,7 +354,7 @@ class _BetterPlayerMaterialControlsState
       child: BetterPlayerMaterialClickableWidget(
         onTap: _onExpandCollapse,
         child: AnimatedOpacity(
-          opacity: controlsNotVisible ? 0.0 : 1.0,
+          opacity: 1.0,
           duration: _controlsConfiguration.controlsHideTime,
           child: Container(
             height: _controlsConfiguration.controlBarHeight,
@@ -376,7 +380,7 @@ class _BetterPlayerMaterialControlsState
     return Container(
       child: Center(
         child: AnimatedOpacity(
-          opacity: controlsNotVisible ? 0.0 : 1.0,
+          opacity:  1.0,
           duration: _controlsConfiguration.controlsHideTime,
           child: _buildMiddleRow(),
         ),
@@ -540,7 +544,7 @@ class _BetterPlayerMaterialControlsState
         }
       },
       child: AnimatedOpacity(
-        opacity: controlsNotVisible ? 0.0 : 1.0,
+        opacity:  1.0,
         duration: _controlsConfiguration.controlsHideTime,
         child: ClipRect(
           child: Container(

@@ -36,6 +36,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
 
 
   bool showControl = true;
+  bool showMenu = false;
   Timer? _hideTimer;
 
   @override
@@ -76,11 +77,15 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
     if (widget.controller!.controlsAlwaysVisible) {
       return;
     }
-    _hideTimer = Timer(const Duration(milliseconds: 3000), () {
-      if(widget.controller!.isPlaying()??true) {
+    _hideTimer = Timer(const Duration(milliseconds: 2000), () {
+      print(showMenu);
+      if((widget.controller!.isPlaying()??true)&& !showMenu) {
         setState(() {
           showControl = false;
         });
+      }
+      if(showMenu){
+        _startHideTimer();
       }
     });
   }
@@ -149,22 +154,22 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
         fit: StackFit.passthrough,
         children: <Widget>[
           if (placeholderOnTop) _buildPlaceholder(betterPlayerController),
-          InkWell(
-            onTap: () {
-              print('ghghg');
-              setState(() {
-                showControl = true;
-              });
-              _startHideTimer();
-            },
-            child: Transform.rotate(
-              angle: rotation * pi / 180,
-              child: _BetterPlayerVideoFitWidget(
-                betterPlayerController,
-                betterPlayerController.getFit(),
+           GestureDetector(
+              onTap: () {
+                setState(() {
+                  showControl = true;
+                });
+                _startHideTimer();
+              },
+              child: Transform.rotate(
+                angle: rotation * pi / 180,
+                child: _BetterPlayerVideoFitWidget(
+                  betterPlayerController,
+                  betterPlayerController.getFit(),
+                ),
               ),
             ),
-          ),
+
           betterPlayerController.betterPlayerConfiguration.overlay ??
               Container(),
           BetterPlayerSubtitlesDrawer(
@@ -174,7 +179,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
             playerVisibilityStream: playerVisibilityStreamController.stream,
           ),
           if (!placeholderOnTop) _buildPlaceholder(betterPlayerController),
-          if(showControl|| Platform.isIOS) GestureDetector(
+          if(showControl&& Platform.isAndroid) GestureDetector(
             onTap: (){
               setState(() {
                 showControl= false;
@@ -186,6 +191,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
               child: _buildControls(context, betterPlayerController),
             ),
           ),
+          if(Platform.isIOS&& showControl) _buildControls(context, betterPlayerController),
         ],
       ),
     );
@@ -229,6 +235,11 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
     return BetterPlayerMaterialControls(
       onControlsVisibilityChanged: onControlsVisibilityChanged,
       controlsConfiguration: controlsConfiguration,
+      onShowMenu: (bool value){
+        setState(() {
+          showMenu = value;
+        });
+      },
     );
   }
 
@@ -241,6 +252,11 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
           showControl = true;
         });
         _startHideTimer();
+      },
+      onShowMenu: (bool value){
+        setState(() {
+          showMenu = value;
+        });
       },
     );
   }
