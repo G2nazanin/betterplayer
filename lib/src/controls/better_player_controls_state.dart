@@ -251,6 +251,7 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
     return BetterPlayerMaterialClickableWidget(
       onTap: () {
         Navigator.of(context).pop();
+        Navigator.of(context).pop();
         betterPlayerController!.setupSubtitleSource(subtitlesSource);
       },
       child: Padding(
@@ -366,6 +367,7 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
     return BetterPlayerMaterialClickableWidget(
       onTap: () {
         Navigator.of(context).pop();
+        Navigator.of(context).pop();
         betterPlayerController!.setResolution(url);
       },
       child: Padding(
@@ -424,6 +426,7 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
       BetterPlayerAsmsAudioTrack audioTrack, bool isSelected) {
     return BetterPlayerMaterialClickableWidget(
       onTap: () {
+        Navigator.of(context).pop();
         Navigator.of(context).pop();
         betterPlayerController!.setAudioTrack(audioTrack);
       },
