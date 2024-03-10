@@ -27,7 +27,11 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
     );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      "https://customer-bgbr1u8j9rke7xd9.cloudflarestream.com/440ad0d7f83a47fabb08df34736dd701/manifest/video.m3u8",
+        "https://train.file.g2storage.com/teacher/section/videos/encoded/p240/1698914206-8a246c99-be97-475e-8b0a-bd6ca69dcd30.mp4",
+      resolutions:  {"p240": "https://train.file.g2storage.com/teacher/section/videos/encoded/p240/1698914206-8a246c99-be97-475e-8b0a-bd6ca69dcd30.mp4",
+        "p360": "https://train.file.g2storage.com/teacher/section/videos/encoded/p360/1698914206-8a246c99-be97-475e-8b0a-bd6ca69dcd30.mp4",
+        "p480": "https://train.file.g2storage.com/teacher/section/videos/encoded/p480/1698914206-8a246c99-be97-475e-8b0a-bd6ca69dcd30.mp4",
+        "p720": "https://train.file.g2storage.com/teacher/section/videos/encoded/p720/1698914206-8a246c99-be97-475e-8b0a-bd6ca69dcd30.mp4"}
     );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.setupDataSource(_betterPlayerDataSource);

@@ -276,6 +276,7 @@ class _BetterPlayerMaterialControlsState
       onTap: () async{
         widget.onShowMenu(true);
         await onShowMoreClicked();
+        _betterPlayerController!.betterPlayerConfiguration.onMenuTap!();
         widget.onShowMenu(false);
       },
       child: Padding(

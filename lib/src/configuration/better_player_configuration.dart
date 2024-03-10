@@ -72,6 +72,7 @@ class BetterPlayerConfiguration {
   final BetterPlayerControlsConfiguration controlsConfiguration;
 
   final Function? reportCallBack;
+  final Function? onMenuTap;
   ///Defines fit of the video, allows to fix video stretching, see possible
   ///values here: https://api.flutter.dev/flutter/painting/BoxFit-class.html
   final BoxFit fit;
@@ -123,6 +124,7 @@ class BetterPlayerConfiguration {
     this.aspectRatio,
     this.autoPlay = false,
     this.reportCallBack,
+    this.onMenuTap,
     this.startAt,
     this.looping = false,
     this.fullScreenByDefault = false,
@@ -190,7 +192,8 @@ class BetterPlayerConfiguration {
     bool? autoDispose,
     bool? expandToFill,
     bool? useRootNavigator,
-    Function? reportCallback
+    Function? reportCallback,
+    Function? onMenuTap,
   }) {
     return BetterPlayerConfiguration(
       aspectRatio: aspectRatio ?? this.aspectRatio,
@@ -231,7 +234,8 @@ class BetterPlayerConfiguration {
       autoDispose: autoDispose ?? this.autoDispose,
       expandToFill: expandToFill ?? this.expandToFill,
       useRootNavigator: useRootNavigator ?? this.useRootNavigator,
-      reportCallBack: reportCallBack ?? this.reportCallBack
+      reportCallBack: reportCallBack ?? this.reportCallBack,
+      onMenuTap: onMenuTap ?? this.onMenuTap
     );
   }
 }
