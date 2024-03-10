@@ -217,7 +217,13 @@ class _BetterPlayerMaterialControlsState
                           controlsNotVisible, _onPlayerHide)
                     else
                       const SizedBox(),
+
+                    _buildMuteButton(_controller),
+                    const SizedBox(width: 10,),
+                    _buildSpeedButton(),
+                    const SizedBox(width: 10),
                     _buildMoreButton(),
+                    const SizedBox(width: 12,)
                   ],
                 ),
               ),
@@ -289,6 +295,25 @@ class _BetterPlayerMaterialControlsState
     );
   }
 
+
+  Widget _buildSpeedButton() {
+    return BetterPlayerMaterialClickableWidget(
+      onTap: () async{
+        widget.onShowMenu(true);
+        // await onShowMoreClicked();
+        _betterPlayerController!.betterPlayerConfiguration.onSpeedTap!();
+        widget.onShowMenu(false);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Icon(
+          _controlsConfiguration.overflowSpeedIcon,
+          color: _controlsConfiguration.iconsColor,
+        ),
+      ),
+    );
+  }
+
   Widget _buildBottomBar() {
     if (!betterPlayerController!.controlsEnabled) {
       return const SizedBox();
@@ -317,10 +342,10 @@ class _BetterPlayerMaterialControlsState
                         ? Expanded(child: _buildPosition())
                         : const SizedBox(),
                   const Spacer(),
-                  if (_controlsConfiguration.enableMute)
-                    _buildMuteButton(_controller)
-                  else
-                    const SizedBox(),
+                  // if (_controlsConfiguration.enableMute)
+                  //   _buildMuteButton(_controller)
+                  // else
+                  //   const SizedBox(),
                   if (_controlsConfiguration.enableFullscreen)
                     _buildExpandButton()
                   else

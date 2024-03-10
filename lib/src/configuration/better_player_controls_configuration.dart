@@ -121,6 +121,7 @@ class BetterPlayerControlsConfiguration {
 
   ///Icon of the overflow menu
   final IconData overflowMenuIcon;
+  final IconData overflowSpeedIcon;
 
   ///Icon of the PiP menu
   final IconData pipMenuIcon;
@@ -202,7 +203,8 @@ class BetterPlayerControlsConfiguration {
     this.enablePip = true,
     this.enableRetry = true,
     this.overflowMenuCustomItems = const [],
-    this.overflowMenuIcon = Icons.more_vert_outlined,
+    this.overflowMenuIcon = Icons.high_quality_outlined,
+    this.overflowSpeedIcon = Icons.speed,
     this.pipMenuIcon = Icons.picture_in_picture_outlined,
     this.playbackSpeedIcon = Icons.shutter_speed_outlined,
     this.qualitiesIcon = Icons.hd_outlined,

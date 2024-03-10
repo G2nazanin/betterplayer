@@ -344,6 +344,46 @@ class _BetterPlayerCupertinoControlsState
       ),
     );
   }
+  Widget _buildSpeedButton(
+      VideoPlayerController? controller,
+      Color backgroundColor,
+      Color iconColor,
+      double barHeight,
+      double iconSize,
+      double buttonPadding,
+      ) {
+    return GestureDetector(
+      onTap: () async{
+        widget.onShowMenu(true);
+        // await onShowMoreClicked();
+        _betterPlayerController!.betterPlayerConfiguration.onSpeedTap!();
+        widget.onShowMenu(false);
+      },
+      child: AnimatedOpacity(
+        opacity: 1.0,
+        duration: _controlsConfiguration.controlsHideTime,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: backgroundColor,
+            ),
+            child: Container(
+              height: barHeight,
+              padding: EdgeInsets.symmetric(
+                horizontal: buttonPadding,
+              ),
+              child: Icon(
+                _controlsConfiguration.overflowSpeedIcon,
+                color: iconColor,
+                size: iconSize,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   GestureDetector _buildMuteButton(
     VideoPlayerController? controller,
@@ -550,6 +590,17 @@ class _BetterPlayerCupertinoControlsState
             )
           else
             const SizedBox(),
+          const SizedBox(
+            width: 4,
+          ),
+          _buildSpeedButton(
+              _controller,
+              backgroundColor,
+              iconColor,
+              barHeight,
+              iconSize,
+              buttonPadding,
+            )
         ],
       ),
     );
