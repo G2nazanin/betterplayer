@@ -315,7 +315,8 @@ class _BetterPlayerCupertinoControlsState
     return GestureDetector(
       onTap: () async{
         widget.onShowMenu(true);
-        await onShowMoreClicked();
+        // await onShowMoreClicked();
+        _betterPlayerController!.betterPlayerConfiguration.onMenuTap!();
         widget.onShowMenu(false);
       },
       child: AnimatedOpacity(

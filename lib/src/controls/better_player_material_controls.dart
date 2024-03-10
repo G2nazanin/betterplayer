@@ -275,7 +275,7 @@ class _BetterPlayerMaterialControlsState
     return BetterPlayerMaterialClickableWidget(
       onTap: () async{
         widget.onShowMenu(true);
-        await onShowMoreClicked();
+        // await onShowMoreClicked();
         _betterPlayerController!.betterPlayerConfiguration.onMenuTap!();
         widget.onShowMenu(false);
       },
